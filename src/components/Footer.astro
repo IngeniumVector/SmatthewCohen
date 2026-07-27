@@ -1,0 +1,40 @@
+---
+// Footer: IngeniumVector (real) + LinkedIn / GitHub (URLs pending from SM).
+const year = new Date().getFullYear();
+const links = [
+  { label: 'IngeniumVector', href: 'https://ingeniumvector.com/', ready: true },
+  // SM to supply real profile URLs before deploy; kept labeled so the footer matches spec.
+  { label: 'LinkedIn', href: '#', ready: false },
+  { label: 'GitHub', href: '#', ready: false },
+];
+---
+<footer class="footer" aria-labelledby="footer-h">
+  <div class="wrap footer__inner">
+    <h2 id="footer-h" class="visually-hidden">Site footer</h2>
+    <p class="footer__name">Smatthew Cohen</p>
+    <nav aria-label="Footer">
+      <ul class="clean footer__links">
+        {links.map((l) => (
+          <li>
+            {l.ready
+              ? <a href={l.href}>{l.label}</a>
+              : <a href={l.href} aria-disabled="true" title="Link coming soon">{l.label}</a>}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <p class="muted footer__meta">&copy; {year} Smatthew Cohen</p>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); padding-block: 2.5rem; }
+  .footer__inner { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; }
+  .footer__name { font-weight: 650; margin: 0; }
+  .footer__links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .footer__meta { margin: 0; font-size: 0.9rem; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+</style>

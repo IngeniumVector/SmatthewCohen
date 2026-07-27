@@ -1,0 +1,49 @@
+---
+// Proof cards: real, anonymized wins from the IngeniumVector record. Monospace numbers
+// are the signature. Every figure here is sourced from work already in production, not invented.
+const proofs = [
+  {
+    stat: '50',
+    unit: 'live',
+    claim: 'An orchestrated ecosystem of 50 automations in daily production, backed by encrypted, self-verifying backups and monitoring.',
+  },
+  {
+    stat: 'Weekly',
+    unit: 'cadence',
+    claim: 'A hands-off editorial pipeline for a law firm that researches, drafts, quality-checks, and publishes on a fixed weekly schedule.',
+  },
+  {
+    stat: '24/7',
+    unit: 'watch',
+    claim: 'Backups and health checks that run around the clock and prove themselves, so a silent failure never passes for success.',
+  },
+];
+---
+<section class="section" id="proof" aria-labelledby="proof-h">
+  <div class="wrap">
+    <p class="eyebrow">Proof</p>
+    <h2 id="proof-h">Results that already run in production.</h2>
+
+    <div class="grid grid--3" style="margin-top: 2rem;">
+      {proofs.map((p) => (
+        <figure class="card proof">
+          <div class="proof__num">
+            <span class="stat stat--big">{p.stat}</span>
+            <span class="stat proof__unit">{p.unit}</span>
+          </div>
+          <figcaption class="card__label">{p.claim}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="muted proof__note" style="margin-top: 1.25rem;">
+      Client work is described without naming names. Details on request.
+    </p>
+  </div>
+</section>
+
+<style>
+  .proof { gap: 0.75rem; }
+  .proof__num { display: flex; align-items: baseline; gap: 0.4rem; }
+  .proof__unit { color: var(--accent-strong); font-size: 1rem; }
+  .proof__note { font-size: 0.9rem; }
+</style>

@@ -1,0 +1,33 @@
+---
+// Hero: name / positioning / portrait / single CTA.
+---
+<header class="section wrap hero">
+  <div class="hero__text">
+    <p class="eyebrow">IngeniumVector</p>
+    <h1>Smatthew Cohen</h1>
+    <p class="lede">
+      I build automation and AI systems that carry real operational load, so small
+      teams ship more without adding headcount.
+    </p>
+    <p class="hero__cta">
+      <a class="btn btn--primary" href="#contact">Start a conversation</a>
+    </p>
+  </div>
+  <div class="hero__portrait">
+    <!-- Portrait pending from SM. When supplied, replace this frame with:
+         <img src="/smatthew-cohen.jpg" alt="Smatthew Cohen" width="480" height="600" /> -->
+    <div class="portrait-frame" role="img" aria-label="Portrait of Smatthew Cohen, coming soon">
+      <span class="ph">[PORTRAIT]</span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero { display: grid; gap: var(--gap); align-items: center; padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  @media (min-width: 52rem) { .hero { grid-template-columns: 1.4fr 1fr; } }
+  .hero__cta { margin-top: 1.75rem; }
+  .portrait-frame {
+    aspect-ratio: 4 / 5; border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--paper-2); display: grid; place-items: center; color: var(--ink-soft);
+  }
+</style>

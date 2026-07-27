@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Pre-commit guard for smatthewcohen.com (BO-SMC-WEBSITE-V1).
+# Rejects em/en dashes AND the banned operator-voice vocab in staged content files.
+# Mirrors the AJB hook (BO-COD-MSG-028), extended per the SMC spec.
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(astro|md|mdx|html|ts|js|json)$' || true)
+[ -z "$STAGED" ] && exit 0
+FAIL=0
+for f in $STAGED; do
+  dash=$(git show ":$f" 2>/dev/null | grep -nP '\x{2014}|\x{2013}|&mdash;|&ndash;|&#8212;|&#8211;' || true)
+  [ -n "$dash" ] && { FAIL=1; echo "DASH in $f:"; echo "$dash" | sed 's/^/  /'; }
+  vocab=$(git show ":$f" 2>/dev/null | grep -niE '\b(delve|utilize|leverage|facilitate|streamline)\b' || true)
+  [ -n "$vocab" ] && { FAIL=1; echo "BANNED VOCAB in $f:"; echo "$vocab" | sed 's/^/  /'; }
+done
+if [ "$FAIL" -eq 1 ]; then
+  echo ""
+  echo "COMMIT REJECTED: em/en dash or banned vocab in staged files (SMC style rules)."
+  echo "Fix: dashes -> period/comma/colon/hyphen; drop delve/utilize/leverage/facilitate/streamline."
+  echo "Emergency bypass (operator approval): git commit --no-verify"
+  exit 1
+fi
+exit 0

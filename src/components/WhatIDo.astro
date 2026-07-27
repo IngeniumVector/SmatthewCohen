@@ -1,0 +1,36 @@
+---
+// What I do: IngeniumVector framed as outcomes, not services.
+const items = [
+  {
+    k: 'Automation that runs itself',
+    v: 'Orchestrated AI agents and workflows that execute recurring operations end to end, on schedule, with no one in the loop.',
+  },
+  {
+    k: 'Content on a cadence',
+    v: 'Research-to-publish pipelines that keep a site current every week, without a full content team behind it.',
+  },
+  {
+    k: 'Sites that load fast and get found',
+    v: 'Performance and local-visibility work that holds up under a real audit, not just a checklist.',
+  },
+];
+---
+<section class="section section--band" id="what-i-do" aria-labelledby="what-i-do-h">
+  <div class="wrap">
+    <p class="eyebrow">What I do</p>
+    <h2 id="what-i-do-h">Systems that do the work, not demos that describe it.</h2>
+    <p class="lede muted">
+      IngeniumVector designs and runs the automation behind content, marketing, and
+      back-office operations. Built to run in production, not to impress in a pitch.
+    </p>
+
+    <div class="grid grid--3" style="margin-top: 2rem;">
+      {items.map((it) => (
+        <div class="card">
+          <h3>{it.k}</h3>
+          <p class="card__label">{it.v}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

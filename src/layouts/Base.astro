@@ -1,0 +1,67 @@
+---
+// Base layout: head/meta/canonical + skip link. BO-SMC-WEBSITE-V1.
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Smatthew Cohen',
+  description = 'Smatthew Cohen builds automation and AI systems that run in production for small businesses. Founder of IngeniumVector.',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const robots = noindex ? 'noindex, follow' : 'index, follow';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Smatthew Cohen',
+  url: 'https://smatthewcohen.com/',
+  jobTitle: 'Founder, IngeniumVector',
+  worksFor: { '@type': 'Organization', name: 'IngeniumVector', url: 'https://ingeniumvector.com/' },
+  knowsAbout: ['Automation', 'AI systems', 'Workflow orchestration', 'Content pipelines', 'Technical SEO'],
+};
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Smatthew Cohen',
+  url: 'https://smatthewcohen.com/',
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+
+    <!-- Open Graph (placeholder image swapped in the copy/asset pass) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+
+    <meta name="theme-color" content="#0e6b66" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101317" media="(prefers-color-scheme: dark)" />
+
+    <!-- Structured data: Person + WebSite -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(siteSchema)} />
+
+    <!-- ANALYTICS: default is self-hosted cookieless Umami (BO-SMC-WEBSITE-V1).
+         Script left commented until SM confirms the website id for this domain. -->
+    <!-- <script defer src="https://stats.ingeniumvector.com/script.js" data-website-id="SMC_UMAMI_ID"></script> -->
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

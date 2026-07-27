@@ -1,0 +1,29 @@
+---
+// Short about.
+---
+<section class="section section--band" id="about" aria-labelledby="about-h">
+  <div class="wrap about">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 id="about-h">Operator, not spectator.</h2>
+    </div>
+    <div class="about__body">
+      <p>
+        I am Smatthew Cohen. I run IngeniumVector, where I design and operate the
+        automation and AI systems behind small businesses that want to move faster
+        without hiring for it.
+      </p>
+      <p class="muted">
+        The work is hands-on: I build the pipelines, wire the integrations, and stay
+        on the hook while they run. If a system cannot prove it worked, I treat it as
+        broken until it can.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { display: grid; gap: var(--gap); }
+  @media (min-width: 52rem) { .about { grid-template-columns: 1fr 1.4fr; align-items: start; } }
+  .about__body { max-width: 60ch; }
+</style>

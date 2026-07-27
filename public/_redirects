@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects (BO-SMC-WEBSITE-V1).
+# www -> apex canonical, mirroring the AJB setup. 301 permanent.
+https://www.smatthewcohen.com/* https://smatthewcohen.com/:splat 301

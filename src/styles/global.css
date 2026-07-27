@@ -1,0 +1,125 @@
+/* smatthewcohen.com v1 design system (BO-SMC-WEBSITE-V1).
+   Operator, not influencer: restrained, high-contrast, one disciplined accent,
+   monospace for proof numbers as the signature move. No terracotta, no generic-AI
+   violet/indigo gradients. AA contrast floor. */
+
+:root {
+  /* Ink / paper */
+  --paper: #ffffff;
+  --paper-2: #f6f7f8;      /* alternating section band */
+  --ink: #14181d;          /* body text on paper: ~14.8:1 */
+  --ink-soft: #4a535f;     /* secondary text on paper: ~7.4:1 (AA) */
+  --line: #e4e7eb;         /* hairlines */
+
+  /* Single accent: deep petrol. Credible, not trendy. */
+  --accent: #0e6b66;       /* on paper ~5.0:1 for large/UI */
+  --accent-strong: #0a4f4b;/* text-weight accent on paper ~7.8:1 (AA) */
+  --accent-wash: #e8f1f0;  /* faint accent fill */
+  --on-accent: #ffffff;    /* text on accent fills ~5.0:1+ */
+
+  /* Type */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* Scale */
+  --maxw: 68rem;
+  --gap: clamp(1rem, 2.5vw, 1.75rem);
+  --section-y: clamp(3.5rem, 8vw, 6rem);
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #101317;
+    --paper-2: #161a1f;
+    --ink: #eef1f4;
+    --ink-soft: #a6b0bc;
+    --line: #262c33;
+    --accent: #4fd0c9;
+    --accent-strong: #7fe0da;
+    --accent-wash: #12211f;
+    --on-accent: #06201e;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.5em; font-weight: 650; }
+h1 { font-size: clamp(2.1rem, 1.3rem + 3.4vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent-strong); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: var(--accent); }
+
+/* Keyboard focus: always visible */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--ink); color: var(--paper); padding: 0.6rem 1rem; border-radius: 0 0 var(--radius) 0;
+}
+.skip-link:focus { left: 0; }
+
+/* Layout */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.1rem, 4vw, 2rem); }
+.section { padding-block: var(--section-y); }
+.section--band { background: var(--paper-2); border-block: 1px solid var(--line); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent-strong); margin: 0 0 0.75rem;
+}
+
+/* The signature: monospace proof numbers */
+.stat { font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+.stat--big { font-size: clamp(2rem, 1.4rem + 2.4vw, 2.9rem); letter-spacing: -0.02em; line-height: 1; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font: inherit; font-weight: 600; line-height: 1;
+  padding: 0.85rem 1.35rem; border-radius: var(--radius);
+  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+}
+.btn--primary { background: var(--accent); color: var(--on-accent); }
+.btn--primary:hover { background: var(--accent-strong); }
+.btn--ghost { background: transparent; color: var(--accent-strong); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--accent); }
+
+/* Cards */
+.grid { display: grid; gap: var(--gap); }
+@media (min-width: 40rem) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 52rem) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+.card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;
+}
+.card__label { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+
+/* Placeholder marker: makes un-filled copy obvious in review and in the rendered page. */
+.ph {
+  background: var(--accent-wash); color: var(--accent-strong);
+  border: 1px dashed var(--accent); border-radius: 4px;
+  padding: 0.05em 0.4em; font-family: var(--font-mono); font-size: 0.9em; white-space: nowrap;
+}
+.muted { color: var(--ink-soft); }
+.lede { font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem); color: var(--ink-soft); max-width: 46ch; }
+ul.clean { list-style: none; margin: 0; padding: 0; }
