@@ -2,6 +2,8 @@
 
 Single-page personal site for Smatthew Cohen. IngeniumVector credibility anchor. Build key `BO-SMC-WEBSITE-V1`.
 
+> Name: always **Smatthew Cohen**, one word. Never "S Matthew", "SMatthew", or any split-name capitalization. Applies to copy, meta, schema, alt text, and the repo name (`IngeniumVector/SmatthewCohen`).
+
 ## Stack
 - Astro (static output), deployed on Cloudflare Pages.
 - No JS framework, no client runtime beyond optional analytics.
