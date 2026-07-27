@@ -1,16 +1,32 @@
 #!/usr/bin/env bash
 # Pre-commit guard for smatthewcohen.com (BO-SMC-WEBSITE-V1).
-# Rejects em/en dashes AND the banned operator-voice vocab in staged content files.
+# Rejects em/en dashes AND banned operator-voice vocab in staged content files.
 # Mirrors the AJB hook (BO-COD-MSG-028), extended per the SMC spec.
+#
+# LOCALE: git hooks run with locale unset, where `grep -P '\x{2014}'` ERRORS
+# ("character code point value too large") instead of matching. A guard that errors
+# silently is a false green. Force a UTF-8 locale so the dash pattern actually runs.
+if locale -a 2>/dev/null | grep -qi '^C\.utf8$'; then export LC_ALL=C.UTF-8
+elif locale -a 2>/dev/null | grep -qi '^en_US\.utf8$'; then export LC_ALL=en_US.UTF-8
+fi
+
 STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(astro|md|mdx|html|ts|js|json)$' || true)
 [ -z "$STAGED" ] && exit 0
+
 FAIL=0
 for f in $STAGED; do
-  dash=$(git show ":$f" 2>/dev/null | grep -nP '\x{2014}|\x{2013}|&mdash;|&ndash;|&#8212;|&#8211;' || true)
+  # NO `|| true` on the dash grep: a pattern/locale error must surface, not pass blind.
+  dash=$(git show ":$f" 2>/dev/null | grep -nP '\x{2014}|\x{2013}|&mdash;|&ndash;|&#8212;|&#8211;')
+  rc=$?
+  if [ "$rc" -eq 2 ]; then
+    echo "PRE-COMMIT ERROR: dash scan could not run on $f (locale/grep). Refusing to pass blind."
+    exit 1
+  fi
   [ -n "$dash" ] && { FAIL=1; echo "DASH in $f:"; echo "$dash" | sed 's/^/  /'; }
   vocab=$(git show ":$f" 2>/dev/null | grep -niE '\b(delve|utilize|leverage|facilitate|streamline)\b' || true)
   [ -n "$vocab" ] && { FAIL=1; echo "BANNED VOCAB in $f:"; echo "$vocab" | sed 's/^/  /'; }
 done
+
 if [ "$FAIL" -eq 1 ]; then
   echo ""
   echo "COMMIT REJECTED: em/en dash or banned vocab in staged files (SMC style rules)."
