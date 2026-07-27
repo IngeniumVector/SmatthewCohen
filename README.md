@@ -14,15 +14,17 @@ Single-page personal site for Smatthew Cohen. IngeniumVector credibility anchor.
 - `public/_redirects` - www to apex canonical (mirrors AJB).
 - `public/_headers` - baseline security + asset caching.
 
-## Status: SCAFFOLD (placeholder copy)
-All human copy is marked with a dashed `.ph` placeholder chip and reads like `[POSITIONING LINE]`.
-The copy pass and deploy wait on SM inputs:
-1. Positioning line
-2. 3-4 real wins + numbers (and anonymization preference)
-3. Portrait image
-4. CTA tool (booking link or email)
-5. Analytics: confirm self-hosted cookieless Umami (default) + website id
-6. Cloudflare account state + deploy access (apex/www + Pages project)
+## Status: BUILT with real copy, pending deploy
+Copy is written and honest (SM ungated the copy pass, MSG-1645): every proof figure is
+sourced from work already in production, client work is anonymized, no invented numbers.
+Build is clean (astro check 0/0/0), em-dash + banned-vocab clean, single h1, Person + WebSite
+schema, apex canonical.
+
+Still pending from SM before deploy:
+1. Portrait image (the hero shows a marked `[PORTRAIT]` frame until then)
+2. Real LinkedIn + GitHub profile URLs (footer placeholders point to `#`)
+3. Analytics: confirm self-hosted cookieless Umami website id for this domain
+4. Cloudflare account state + deploy access (apex/www + Pages project)
 
 ## Develop
 ```
