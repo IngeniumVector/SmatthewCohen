@@ -14,11 +14,16 @@
     </p>
   </div>
   <div class="hero__portrait">
-    <!-- Portrait pending from SM. When supplied, replace this frame with:
-         <img src="/smatthew-cohen.jpg" alt="Smatthew Cohen" width="480" height="600" /> -->
-    <div class="portrait-frame" role="img" aria-label="Portrait of Smatthew Cohen, coming soon">
-      <span class="ph">[PORTRAIT]</span>
-    </div>
+    <img
+      class="portrait"
+      src="/images/smatthew-cohen.webp"
+      alt="Smatthew Cohen"
+      width="768"
+      height="1184"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
   </div>
 </header>
 
@@ -26,8 +31,10 @@
   .hero { display: grid; gap: var(--gap); align-items: center; padding-top: clamp(2.5rem, 6vw, 4.5rem); }
   @media (min-width: 52rem) { .hero { grid-template-columns: 1.4fr 1fr; } }
   .hero__cta { margin-top: 1.75rem; }
-  .portrait-frame {
-    aspect-ratio: 4 / 5; border: 1px solid var(--line); border-radius: var(--radius);
-    background: var(--paper-2); display: grid; place-items: center; color: var(--ink-soft);
+  .portrait {
+    display: block; width: 100%; height: auto; max-width: 24rem;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    aspect-ratio: 768 / 1184; object-fit: cover;
   }
+  @media (min-width: 52rem) { .hero__portrait { justify-self: end; } }
 </style>

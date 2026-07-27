@@ -25,6 +25,10 @@ const personSchema = {
   jobTitle: 'Founder, IngeniumVector',
   worksFor: { '@type': 'Organization', name: 'IngeniumVector', url: 'https://ingeniumvector.com/' },
   knowsAbout: ['Automation', 'AI systems', 'Workflow orchestration', 'Content pipelines', 'Technical SEO'],
+  sameAs: [
+    'https://www.linkedin.com/in/smatthewcohen/',
+    'https://github.com/IngeniumVector',
+  ],
 };
 const siteSchema = {
   '@context': 'https://schema.org',
@@ -56,9 +60,9 @@ const siteSchema = {
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(siteSchema)} />
 
-    <!-- ANALYTICS: default is self-hosted cookieless Umami (BO-SMC-WEBSITE-V1).
-         Script left commented until SM confirms the website id for this domain. -->
-    <!-- <script defer src="https://stats.ingeniumvector.com/script.js" data-website-id="SMC_UMAMI_ID"></script> -->
+    <!-- Analytics: self-hosted cookieless Umami (BO-SMC-WEBSITE-V1). Website created for
+         smatthewcohen.com in the IV console; dashboard stays IV-only. -->
+    <script defer is:inline src="https://stats.ingeniumvector.com/script.js" data-website-id="4f802e03-4807-4446-b824-2ad247897533"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
