@@ -38,3 +38,19 @@ npm run build    # astro check + static build to dist/
 ## Deploy
 Cloudflare Pages, build command `npm run build`, output `dist/`. Ships via the COD safe-commit
 gateway with post-push HTTP live-verify (BO-DEC-064). Not the content queue.
+
+### www to apex canonical (dashboard, not repo)
+Cloudflare Pages `_redirects` cannot do a cross-host www to apex 301 (absolute URLs are
+rejected at deploy). Set it at the zone level instead, in the Cloudflare dashboard for
+`smatthewcohen.com`:
+
+1. Rules > Redirect Rules > Create rule.
+   - When incoming requests match: Hostname equals `www.smatthewcohen.com`
+   - Then: Static redirect to `https://smatthewcohen.com` + concatenate the path, status 301,
+     preserve query string.
+2. Keep the apex (`smatthewcohen.com`) as the Pages custom domain. The redirect rule handles
+   www, so www does not need to be a Pages custom domain.
+
+Until that rule exists, `www.` returns a Cloudflare error (522) because the Pages project only
+serves the apex. The apex itself is fully live. `rel=canonical` already points every page at the
+apex, so search engines get the canonical signal regardless.

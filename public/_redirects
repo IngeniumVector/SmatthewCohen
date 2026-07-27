@@ -1,3 +1,10 @@
 # Cloudflare Pages redirects (BO-SMC-WEBSITE-V1).
-# www -> apex canonical, mirroring the AJB setup. 301 permanent.
-https://www.smatthewcohen.com/* https://smatthewcohen.com/:splat 301
+#
+# NOTE: www -> apex canonical is NOT done here. Cloudflare Pages _redirects only
+# supports same-host path redirects (relative targets); a cross-host www->apex 301
+# with an absolute URL is rejected at deploy ("Only relative URLs are allowed") and
+# silently skipped. This is also how AJB does it: its _redirects holds only path
+# redirects, and www->apex lives as a Cloudflare Redirect Rule at the zone level.
+#
+# www -> apex for smatthewcohen.com is a dashboard Redirect Rule (see README / ship note),
+# not a repo file. This file is intentionally rule-free until a real path redirect is needed.
